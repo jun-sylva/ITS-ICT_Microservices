@@ -1,11 +1,11 @@
-package org.library.notification;
+package org.library.book;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NotificationApplication {
+public class BookAppication {
     public static void main(String[] args) {
-        SpringApplication.run(NotificationApplication.class, args);
+        SpringApplication.run(BookAppication.class, args);
     }
 }

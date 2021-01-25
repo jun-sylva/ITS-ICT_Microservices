@@ -19,7 +19,7 @@ spec:
         - name: notification-ms
           image: dennydgl1/notification:1.0-SNAPSHOT
           ports:
-          - containerPort: 8102
+          - containerPort: 8124
           volumeMounts:
           - mountPath: /app/config
             readOnly: true
@@ -41,9 +41,9 @@ data:
     kafka.broker.urls=kafka:9092    
 
     # App config
-    server.port=8104
+    server.port=8124
     spring.application.name=NotificationMicroservice
-    server.servlet.context-path=/notification-service
+    server.servlet.context-path=/notif-service
 
     # Log config
     logging.level.org.springframework.web.servlet.DispatcherServlet=TRACE

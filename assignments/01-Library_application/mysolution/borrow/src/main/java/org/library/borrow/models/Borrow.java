@@ -13,6 +13,8 @@ public class Borrow {
 
     @Id
     private long borrowID;
+    private String startDate;
+    private String stopDate;
     private String customerID;
     private String bookID;
     private String notifyPhoneNum;
@@ -49,10 +51,28 @@ public class Borrow {
         this.notifyPhoneNum = notifyPhoneNum;
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getStopDate() {
+        return stopDate;
+    }
+
+    public void setStopDate(String stopDate) {
+        this.stopDate = stopDate;
+    }
+
     @Override
     public String toString() {
         return "Borrow{" +
                 "borrowID=" + borrowID +
+                ", start Date='" + startDate + '\'' +
+                ", stop Date='" + stopDate + '\'' +
                 ", customerID='" + customerID + '\'' +
                 ", bookID='" + bookID + '\'' +
                 ", notifyPhoneNum='" + notifyPhoneNum + '\'' +

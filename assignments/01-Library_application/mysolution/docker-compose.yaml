@@ -1,6 +1,30 @@
 version: "3.7"
 services:
   #
+  # Book Microservice
+  # 
+  book-ms:
+    build:
+      context: ./book
+    container_name: book-ms
+    ports:
+      - "8122:8122"
+    depends_on:
+      - mongodb_db
+
+  mongodb_db:
+    image: mongo:latest
+    container_name: book-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: Book_DB
+    ports:
+      - 2717:2717
+    volumes:
+      - mongodb_data:/data/db
+
+  #
   # Customer Microservice
   # 
   customer-ms:
@@ -8,7 +32,7 @@ services:
       context: ./customer
     container_name: customer-ms
     ports:
-      - "8102:8102"
+      - "8121:8121"
     depends_on:
       - mongodb_db
 
@@ -25,25 +49,25 @@ services:
       - mongodb_data:/data/db
 
   #
-  # Order Microservice
+  # Borrowing Microservice
   #
-  order-ms:
+  borrowing-ms:
     build:
-      context: ./order
-    container_name: order-ms
+      context: ./Borrow
+    container_name: Borrowing-ms
     ports:
-      - "8103:8103"
+      - "8123:8123"
     depends_on:
       - postgres_db
 
   postgres_db:
     image: postgres:latest
-    container_name: order-postgres
+    container_name: Borrowing-postgres
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./order/dbinit.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+      - ./Borrow/dbinit.sql:/docker-entrypoint-initdb.d/schema.sql:ro
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -58,7 +82,7 @@ services:
       context: ./notification
     container_name: notification-ms
     ports:
-      - "8104:8104"
+      - "8124:8124"
     depends_on:
       - kafka
 

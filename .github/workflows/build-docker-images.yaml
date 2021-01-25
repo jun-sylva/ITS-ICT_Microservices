@@ -10,17 +10,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  
-  build-customer:
+
+  build-book:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: labs/02-eCommerce_microservices/customer
+        working-directory: assignments/01-Library_application/mysolution/book
     steps:
     - uses: actions/checkout@v2
     - name: Add hosts to /etc/hosts
       run: |
-        sudo echo "127.0.0.1 customer-mongodb order-postgres kafka" | sudo tee -a /etc/hosts
+        sudo echo "127.0.0.1 book-mongodb customer-mongodb order-postgres kafka" | sudo tee -a /etc/hosts
     - name: Get branch
       id: get_branch
       run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
@@ -30,8 +30,36 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v1.1.0 
       with:
-        path: labs/02-eCommerce_microservices/customer/
-        dockerfile: labs/02-eCommerce_microservices/customer/Dockerfile
+        path: assignments/01-Library_application/mysolution/book
+        dockerfile: assignments/01-Library_application/mysolution/book/Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: ${{ secrets.DOCKER_USERNAME }}/book
+        tags: ${{ steps.get_commit_sha.outputs.COMMIT_SHA }}-${{ steps.get_branch.outputs.BRANCH }}, latest
+        build_args: |
+          TAG=${{ steps.get_commit_sha.outputs.COMMIT_SHA }}-${{ steps.get_branch.outputs.BRANCH }}
+  
+  build-customer:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: assignments/01-Library_application/mysolution/customer
+    steps:
+    - uses: actions/checkout@v2
+    - name: Add hosts to /etc/hosts
+      run: |
+        sudo echo "127.0.0.1 book-mongodb customer-mongodb order-postgres kafka" | sudo tee -a /etc/hosts
+    - name: Get branch
+      id: get_branch
+      run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
+    - name: Get the commit SHA
+      id: get_commit_sha
+      run: echo ::set-output name=COMMIT_SHA::$(git rev-parse --short "$GITHUB_SHA")
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v1.1.0 
+      with:
+        path: assignments/01-Library_application/mysolution/customer
+        dockerfile: assignments/01-Library_application/mysolution/customer/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ${{ secrets.DOCKER_USERNAME }}/customer
@@ -39,16 +67,16 @@ jobs:
         build_args: |
           TAG=${{ steps.get_commit_sha.outputs.COMMIT_SHA }}-${{ steps.get_branch.outputs.BRANCH }}
   
-  build-order:
+  build-borrow:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: labs/02-eCommerce_microservices/order
+        working-directory: assignments/01-Library_application/mysolution/borrow
     steps:
     - uses: actions/checkout@v2
     - name: Add hosts to /etc/hosts
       run: |
-        sudo echo "127.0.0.1 customer-mongodb order-postgres kafka" | sudo tee -a /etc/hosts
+        sudo echo "127.0.0.1 book-mongodb customer-mongodb order-postgres kafka" | sudo tee -a /etc/hosts
     - name: Get branch
       id: get_branch
       run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
@@ -58,11 +86,11 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v1.1.0 
       with:
-        path: labs/02-eCommerce_microservices/order/
-        dockerfile: labs/02-eCommerce_microservices/order/Dockerfile
+        path: assignments/01-Library_application/mysolution/borrow/
+        dockerfile: assignments/01-Library_application/mysolution/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ${{ secrets.DOCKER_USERNAME }}/order
+        repository: ${{ secrets.DOCKER_USERNAME }}/borrow
         tags: ${{ steps.get_commit_sha.outputs.COMMIT_SHA }}-${{ steps.get_branch.outputs.BRANCH }}, latest
         build_args: |
           TAG=${{ steps.get_commit_sha.outputs.COMMIT_SHA }}-${{ steps.get_branch.outputs.BRANCH }}
@@ -71,7 +99,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: labs/02-eCommerce_microservices/notification
+        working-directory: assignments/01-Library_application/mysolution/notification
     steps:
     - uses: actions/checkout@v2
     - name: Add hosts to /etc/hosts
@@ -86,8 +114,8 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v1.1.0 
       with:
-        path: labs/02-eCommerce_microservices/notification/
-        dockerfile: labs/02-eCommerce_microservices/notification/Dockerfile
+        path: assignments/01-Library_application/mysolution/notification/
+        dockerfile: assignments/01-Library_application/mysolution/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ${{ secrets.DOCKER_USERNAME }}/notification

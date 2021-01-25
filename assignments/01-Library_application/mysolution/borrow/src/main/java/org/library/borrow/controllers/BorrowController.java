@@ -49,8 +49,10 @@ public class BorrowController {
     public Borrow getBorrowing(@PathVariable Long borrowID){
         Optional<Borrow> borrowOptional = borrowRepository.findById(borrowID);
         if(borrowOptional.isPresent()){
+            log.info("Successful to get " + borrowID);
             return borrowOptional.get();
         }else{
+            log.info(borrowID + " does not exist");
             return null;
         }
     }
@@ -61,24 +63,28 @@ public class BorrowController {
         List<Borrow> borrowings = new ArrayList<Borrow>();
         Iterable<Borrow> iterable = borrowRepository.findAll();
         iterable.forEach(borrowings::add);
+        log.info("Successful to get borrowing");
         return borrowings;
     }
 
     //UPDATE SINGLE BORROWING
     @RequestMapping(value = "/{borrowID}", method = RequestMethod.POST)
     public Borrow modifyBorrowing(@RequestBody Borrow borrow, @RequestBody String borrowID){
+        log.info("Successful to update " + borrowID);
         return borrowRepository.save(borrow);
     }
 
     //DELETE SINGLE BORROWING
     @RequestMapping(value = "/{borrowID}", method = RequestMethod.DELETE)
     public void deleteBorrowing(@PathVariable Long borrowID) {
+        log.info("Successful to delete" + borrowID);
         borrowRepository.deleteById(borrowID);
     }
 
     //DELETE ALL BORROWINGS
     @RequestMapping(method = RequestMethod.DELETE)
     public void deleteAllBorrowing() {
+        log.info("Successful to delete all borrowing");
         borrowRepository.deleteAll();
     }
 }

@@ -1,7 +1,9 @@
 package org.library.customer.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.library.customer.models.Customer;
 import org.library.customer.repos.CustomerRepository;
+import org.library.customer.services.TraceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,8 +11,12 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
+@Slf4j
 @RequestMapping(value = "/lib/customers/")
 public class CustomerController {
+
+    @Autowired
+    TraceService traceService;
 
     @Autowired
     private CustomerRepository customerRepository;

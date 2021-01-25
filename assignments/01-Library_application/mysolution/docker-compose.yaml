@@ -20,7 +20,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: Book_DB
     ports:
-      - 2717:2717
+      - 27017:27017
     volumes:
       - mongodb_data:/data/db
 

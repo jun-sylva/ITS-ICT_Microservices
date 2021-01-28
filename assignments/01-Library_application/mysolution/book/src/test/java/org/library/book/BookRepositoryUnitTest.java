@@ -30,7 +30,7 @@ public class BookRepositoryUnitTest {
     @Test
     public void testAddOneCustomer(){
         Book book = new Book();
-        book.setBook_id(1234567890);
+        book.setBook_id("1234567890");
         book.setTitle("Life");
         book.setAuthor("Junior");
         book.setEditing("Sylva ed");

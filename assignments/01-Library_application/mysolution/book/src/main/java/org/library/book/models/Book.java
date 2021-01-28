@@ -7,17 +7,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Book {
 
     @Id
-    private int book_id;
+    private String book_id;
     private String title;
     private String author;
     private String editing;
     private int year;
     private String category;
 
-    public int getBook_id() {
+    public String getBook_id() {
         return book_id;
     }
-    public void setBook_id(int book_id) {
+    public void setBook_id(String book_id) {
         this.book_id = book_id;
     }
 

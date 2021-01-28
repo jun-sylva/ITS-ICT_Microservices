@@ -2,32 +2,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Borrowing-deployment
+  name: borrowing-deployment
   labels:
-    app: Borrowing
+    app: borrowing
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: Borrowing
+      app: borrowing
   template:
     metadata:
       labels:
-        app: Borrowing
+        app: borrowing
     spec:
       containers:
-        - name: Borrowing-ms
-          image: junsylva/Borrowing:1.0-SNAPSHOT
+        - name: borrowing-ms
+          image: junsylva/borrowing:1.0-SNAPSHOT
           ports:
           - containerPort: 8123
           volumeMounts:
           - mountPath: /app/config
             readOnly: true
-            name: Borrowing-conf
+            name: borrowing-conf
       volumes:
-      - name: Borrowing-conf
+      - name: borrowing-conf
         configMap:
-          name: Borrowing-conf
+          name: borrowing-conf
           items:
             - key: application.properties
               path: application.properties
@@ -35,9 +35,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: Borrowing-service
+  name: borrow-service
   labels:
-    app: Borrowing
+    app: borrowing
 spec:
   type: NodePort
   ports:
@@ -46,7 +46,7 @@ spec:
       port: 8123
       targetPort: 8123
   selector:
-    app: Borrowing
+    app: borrowing
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -81,5 +81,5 @@ data:
     #spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer
     spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
 metadata:
-  name: Borrowing-conf
+  name: borrowing-conf
   namespace: default

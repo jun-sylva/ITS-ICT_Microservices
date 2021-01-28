@@ -112,8 +112,8 @@ Create the app (please replace the placeholder \<YOUR GITHUB ACCOUNT\> with your
 
 ```console
 $ argocd app create microservices \
-    --repo https://github.com/<YOUR GITHUB ACCOUNT>/ITS-ICT_Microservices.git \
-    --path labs/07-Deploy_microservices_on_K8S \
+    --repo https://github.com/jun-sylva/ITS-ICT_Microservices.git \
+    --path assignments/01-Library_application/mysolution/Deploy_on_K8S \
     --dest-server https://kubernetes.default.svc \
     --dest-namespace default \
     --auto-prune \

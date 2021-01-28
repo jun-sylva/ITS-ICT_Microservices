@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: Borrowing-ms
-          image: dennydgl1/Borrowing:1.0-SNAPSHOT
+          image: junsylva/Borrowing:1.0-SNAPSHOT
           ports:
           - containerPort: 8123
           volumeMounts:

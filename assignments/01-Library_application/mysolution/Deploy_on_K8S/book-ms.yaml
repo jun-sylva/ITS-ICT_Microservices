@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: book-ms
-          image: dennydgl1/book:1.0-SNAPSHOT
+          image: junsylva/book:1.0-SNAPSHOT
           ports:
           - containerPort: 8122
           volumeMounts:

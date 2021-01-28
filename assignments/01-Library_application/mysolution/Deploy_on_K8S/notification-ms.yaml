@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: notification-ms
-          image: dennydgl1/notification:1.0-SNAPSHOT
+          image: junsylva/notification:1.0-SNAPSHOT
           ports:
           - containerPort: 8124
           volumeMounts:

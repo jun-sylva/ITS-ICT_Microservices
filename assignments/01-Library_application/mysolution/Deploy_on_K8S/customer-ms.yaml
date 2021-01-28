@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: customer-ms
-          image: dennydgl1/customer:1.0-SNAPSHOT
+          image: junsylva/customer:1.0-SNAPSHOT
           ports:
           - containerPort: 8121
           volumeMounts:

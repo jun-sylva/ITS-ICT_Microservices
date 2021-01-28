@@ -30,7 +30,7 @@ public class CustomerRepositoryUnitTest {
     @Test
     public void testAddOneCustomer(){
         Customer customer = new Customer();
-        customer.setCustomerID(1234567890);
+        customer.setCustomerID("1234567890");
         customer.setName("Junior");
         customer.setSurname("Sielinou");
         customer.setTel("333333333");

@@ -8,7 +8,7 @@ RUN echo "127.0.0.1 book-mongodb customer-mongodb Borrowing-postgres kafka" >> /
 FROM openjdk:8-jdk-alpine
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
-EXPOSE 8121
+EXPOSE 8102
 ENTRYPOINT ["java","-jar","app.jar"]
 
 

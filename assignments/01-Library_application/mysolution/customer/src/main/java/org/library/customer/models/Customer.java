@@ -7,17 +7,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Customer {
 
     @Id
-    private int customerID;
+    private String customerID;
     private  String name;
     private  String surname;
     private  String tel;
     private  String email;
 
-    public int getCustomerID() {
+    public String getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
 

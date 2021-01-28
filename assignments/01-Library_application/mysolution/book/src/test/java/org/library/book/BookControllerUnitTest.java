@@ -28,9 +28,6 @@ public class BookControllerUnitTest {
     @MockBean
     BookRepository repository;
 
-    @MockBean
-    TraceService traceService;
-
     @Test
     public void testGetAllBooks() {
         try {

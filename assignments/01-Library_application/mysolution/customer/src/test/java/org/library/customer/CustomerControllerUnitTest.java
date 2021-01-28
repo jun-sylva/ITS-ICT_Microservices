@@ -28,9 +28,6 @@ public class CustomerControllerUnitTest {
     @MockBean
     CustomerRepository repository;
 
-    @MockBean
-    TraceService traceService;
-
     @Test
     public void testGetAllCustomers() {
         try {

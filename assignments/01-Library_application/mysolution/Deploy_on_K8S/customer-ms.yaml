@@ -42,7 +42,7 @@ spec:
   type: NodePort
   ports:
     - name: http
-      nodePort: 32102
+      nodePort: 32104
       port: 8121
       targetPort: 8121
   selector:
